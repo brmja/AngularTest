@@ -102,3 +102,4 @@ C:\Users\Feras.so\Documents\AngularTest\AngularTechTest\api\bin\System.Web.Optim
 C:\Users\Feras.so\Documents\AngularTest\AngularTechTest\api\bin\Antlr3.Runtime.pdb
 C:\Users\Feras.so\Documents\AngularTest\AngularTechTest\api\obj\Debug\api.dll
 C:\Users\Feras.so\Documents\AngularTest\AngularTechTest\api\obj\Debug\api.pdb
+C:\Users\Feras.so\Documents\AngularTest\AngularTechTest\api\obj\Debug\api.csprojResolveAssemblyReference.cache
