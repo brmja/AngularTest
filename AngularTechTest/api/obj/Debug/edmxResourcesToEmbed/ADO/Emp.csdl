@@ -8,8 +8,61 @@
     <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="Department" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="Salary" Type="Int64" Nullable="false" />
+    <NavigationProperty Name="EmpTasks" Relationship="EmployeesDBModel.FK_EmpTasks_Employees" FromRole="Employee" ToRole="EmpTask" />
   </EntityType>
   <EntityContainer Name="EmployeesDBEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="Employees" EntityType="Self.Employee" />
+    <EntitySet Name="Tasks" EntityType="EmployeesDBModel.Task" />
+    <EntitySet Name="EmpTasks" EntityType="EmployeesDBModel.EmpTask" />
+    <AssociationSet Name="FK_EmpTasks_Employees" Association="EmployeesDBModel.FK_EmpTasks_Employees">
+      <End Role="Employee" EntitySet="Employees" />
+      <End Role="EmpTask" EntitySet="EmpTasks" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EmpTasks_Tasks" Association="EmployeesDBModel.FK_EmpTasks_Tasks">
+      <End Role="Task" EntitySet="Tasks" />
+      <End Role="EmpTask" EntitySet="EmpTasks" />
+    </AssociationSet>
   </EntityContainer>
+  <EntityType Name="Task">
+    <Key>
+      <PropertyRef Name="TaskId" />
+    </Key>
+    <Property Name="TaskId" Type="Int32" Nullable="false" />
+    <Property Name="TaskName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="EmpTasks" Relationship="EmployeesDBModel.FK_EmpTasks_Tasks" FromRole="Task" ToRole="EmpTask" />
+  </EntityType>
+  <EntityType Name="EmpTask">
+    <Key>
+      <PropertyRef Name="EmpTaskId" />
+    </Key>
+    <Property Name="EmpTaskId" Type="Int32" Nullable="false" />
+    <Property Name="EmpId" Type="Int32" Nullable="false" />
+    <Property Name="TaskId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Employee" Relationship="EmployeesDBModel.FK_EmpTasks_Employees" FromRole="EmpTask" ToRole="Employee" />
+    <NavigationProperty Name="Task" Relationship="EmployeesDBModel.FK_EmpTasks_Tasks" FromRole="EmpTask" ToRole="Task" />
+  </EntityType>
+  <Association Name="FK_EmpTasks_Employees">
+    <End Type="EmployeesDBModel.Employee" Role="Employee" Multiplicity="1" />
+    <End Type="EmployeesDBModel.EmpTask" Role="EmpTask" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="EmpTask">
+        <PropertyRef Name="EmpId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EmpTasks_Tasks">
+    <End Type="EmployeesDBModel.Task" Role="Task" Multiplicity="1" />
+    <End Type="EmployeesDBModel.EmpTask" Role="EmpTask" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Task">
+        <PropertyRef Name="TaskId" />
+      </Principal>
+      <Dependent Role="EmpTask">
+        <PropertyRef Name="TaskId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

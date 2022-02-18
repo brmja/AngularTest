@@ -19,7 +19,8 @@
                                 name: 'vendors',
                                 insertBefore: '#app-level-js',
                                 files: [
-                                   'app/js/EmpCtrl.js'
+                                   'app/js/EmpCtrl.js',
+                                   'app/SaveDirective.js'
                                 ]
                             }
                         ])

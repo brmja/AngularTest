@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'C:\Users\Feras.so\Desktop\WebApplication1 (1)\api\ADO\Emp.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Users\Feras.so\Documents\AngularTest\AngularTechTest\api\ADO\Emp.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

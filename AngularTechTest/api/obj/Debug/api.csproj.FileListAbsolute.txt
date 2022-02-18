@@ -100,6 +100,5 @@ C:\Users\Feras.so\Documents\AngularTest\AngularTechTest\api\bin\System.Web.WebPa
 C:\Users\Feras.so\Documents\AngularTest\AngularTechTest\api\bin\System.Web.WebPages.Razor.xml
 C:\Users\Feras.so\Documents\AngularTest\AngularTechTest\api\bin\System.Web.Optimization.xml
 C:\Users\Feras.so\Documents\AngularTest\AngularTechTest\api\bin\Antlr3.Runtime.pdb
-C:\Users\Feras.so\Documents\AngularTest\AngularTechTest\api\obj\Debug\api.csprojResolveAssemblyReference.cache
 C:\Users\Feras.so\Documents\AngularTest\AngularTechTest\api\obj\Debug\api.dll
 C:\Users\Feras.so\Documents\AngularTest\AngularTechTest\api\obj\Debug\api.pdb

@@ -22,10 +22,10 @@ namespace api.Controllers
         }
 
         [HttpGet]
-        [Route("GetById")]
-        public IHttpActionResult GetById(int id)
+        [Route("GetTasks")]
+        public IHttpActionResult GetTasks(int id)
         {
-            var res = RepoEmp.Get(id);
+            var res = RepoEmp.GetTasks(id);
             return Ok(res);
         }
 

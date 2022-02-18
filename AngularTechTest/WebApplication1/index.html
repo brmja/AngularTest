@@ -2,11 +2,23 @@
 
 <html ng-app="myApp">
 <head>
-    <title>First App</title>
+    <title>Angular Tech Test</title>
+
+     <link href="Scripts/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+    <link href="app/css/css.css" rel="stylesheet" />
+
+    <script src="Scripts/jquery/dist/jquery.min.js"></script>
+    <script src="scripts/jquery/dist/jquery-migrate-1.4.1.min.js"></script>
+    <script src="Scripts/bootstrap/dist/js/bootstrap.js"></script>
 
     <script src="Scripts/angular.min.js"></script>
     <script src="Scripts/angular-ui-router.min.js"></script>
-    <script src="Scripts/oclazyload/dist/ocLazyLoad.min.js"></script>
+    <script src="Scripts/oclazyload/dist/ocLazyLoad.min.js"></script>    
+    <script src="Scripts/angular-ui/ui-bootstrap-tpls.min.js"></script>
+    <script src="Scripts/bootstrap-growl/bootstrap-growl.min.js"></script>
+    
+    <script src="Scripts/angularUtils-master/src/directives/pagination/dirPagination.js"></script>
 
     <script src="app/app.module.js"></script>
     <script src="app/Config.js"></script>
@@ -14,15 +26,7 @@
 </head>
 <body>
 
-    <!--<ul class="nav navbar-nav navbar-right">
-        <li><a ui-sref="home"><i class="fa fa-home"></i> Home</a></li>
-        <li><a ui-sref="london"><i class="fa fa-shield"></i> London</a></li>
-    </ul>-->
-
     <div ui-view></div>
 
-    <!--<div>
-        {{food}}
-    </div>-->
 </body>
 </html>

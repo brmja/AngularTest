@@ -18,13 +18,16 @@ namespace api.ADO
         public EmployeesDBEntities()
             : base("name=EmployeesDBEntities")
         {
+            Configuration.LazyLoadingEnabled = false;
         }
-    
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            throw new UnintentionalCodeFirstException();
+            base.OnModelCreating(modelBuilder);
         }
     
         public DbSet<Employee> Employees { get; set; }
+        public DbSet<Task> Tasks { get; set; }
+        public DbSet<EmpTask> EmpTasks { get; set; }
     }
 }

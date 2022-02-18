@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="EmployeesDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="EmployeesDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Employees">
           <Key>
             <PropertyRef Name="Id" />
@@ -14,11 +14,59 @@
           <Property Name="Department" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Salary" Type="bigint" Nullable="false" />
         </EntityType>
+        <EntityType Name="EmpTasks">
+          <Key>
+            <PropertyRef Name="EmpTaskId" />
+          </Key>
+          <Property Name="EmpTaskId" Type="int" Nullable="false" />
+          <Property Name="EmpId" Type="int" Nullable="false" />
+          <Property Name="TaskId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tasks">
+          <Key>
+            <PropertyRef Name="TaskId" />
+          </Key>
+          <Property Name="TaskId" Type="int" Nullable="false" />
+          <Property Name="TaskName" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_EmpTasks_Employees">
+          <End Role="Employees" Type="Self.Employees" Multiplicity="1" />
+          <End Role="EmpTasks" Type="Self.EmpTasks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employees">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EmpTasks">
+              <PropertyRef Name="EmpId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmpTasks_Tasks">
+          <End Role="Tasks" Type="Self.Tasks" Multiplicity="1" />
+          <End Role="EmpTasks" Type="Self.EmpTasks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tasks">
+              <PropertyRef Name="TaskId" />
+            </Principal>
+            <Dependent Role="EmpTasks">
+              <PropertyRef Name="TaskId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="EmployeesDBModelStoreContainer">
           <EntitySet Name="Employees" EntityType="Self.Employees" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EmpTasks" EntityType="Self.EmpTasks" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tasks" EntityType="Self.Tasks" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_EmpTasks_Employees" Association="Self.FK_EmpTasks_Employees">
+            <End Role="Employees" EntitySet="Employees" />
+            <End Role="EmpTasks" EntitySet="EmpTasks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmpTasks_Tasks" Association="Self.FK_EmpTasks_Tasks">
+            <End Role="Tasks" EntitySet="Tasks" />
+            <End Role="EmpTasks" EntitySet="EmpTasks" />
+          </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="EmployeesDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -30,11 +78,64 @@
           <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Department" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Salary" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="EmpTasks" Relationship="EmployeesDBModel.FK_EmpTasks_Employees" FromRole="Employee" ToRole="EmpTask" />
         </EntityType>
         <EntityContainer Name="EmployeesDBEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Employees" EntityType="Self.Employee" />
-        </EntityContainer>
-      </Schema>
+          <EntitySet Name="Tasks" EntityType="EmployeesDBModel.Task" />
+          <EntitySet Name="EmpTasks" EntityType="EmployeesDBModel.EmpTask" />
+          <AssociationSet Name="FK_EmpTasks_Employees" Association="EmployeesDBModel.FK_EmpTasks_Employees">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="EmpTask" EntitySet="EmpTasks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmpTasks_Tasks" Association="EmployeesDBModel.FK_EmpTasks_Tasks">
+            <End Role="Task" EntitySet="Tasks" />
+            <End Role="EmpTask" EntitySet="EmpTasks" />
+          </AssociationSet>
+          </EntityContainer>
+        <EntityType Name="Task">
+          <Key>
+            <PropertyRef Name="TaskId" />
+          </Key>
+          <Property Name="TaskId" Type="Int32" Nullable="false" />
+          <Property Name="TaskName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="EmpTasks" Relationship="EmployeesDBModel.FK_EmpTasks_Tasks" FromRole="Task" ToRole="EmpTask" />
+        </EntityType>
+        <EntityType Name="EmpTask">
+          <Key>
+            <PropertyRef Name="EmpTaskId" />
+          </Key>
+          <Property Name="EmpTaskId" Type="Int32" Nullable="false" />
+          <Property Name="EmpId" Type="Int32" Nullable="false" />
+          <Property Name="TaskId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Employee" Relationship="EmployeesDBModel.FK_EmpTasks_Employees" FromRole="EmpTask" ToRole="Employee" />
+          <NavigationProperty Name="Task" Relationship="EmployeesDBModel.FK_EmpTasks_Tasks" FromRole="EmpTask" ToRole="Task" />
+        </EntityType>
+        <Association Name="FK_EmpTasks_Employees">
+          <End Type="EmployeesDBModel.Employee" Role="Employee" Multiplicity="1" />
+          <End Type="EmployeesDBModel.EmpTask" Role="EmpTask" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EmpTask">
+              <PropertyRef Name="EmpId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmpTasks_Tasks">
+          <End Type="EmployeesDBModel.Task" Role="Task" Multiplicity="1" />
+          <End Type="EmployeesDBModel.EmpTask" Role="EmpTask" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Task">
+              <PropertyRef Name="TaskId" />
+            </Principal>
+            <Dependent Role="EmpTask">
+              <PropertyRef Name="TaskId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -47,6 +148,23 @@
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Department" ColumnName="Department" />
                 <ScalarProperty Name="Salary" ColumnName="Salary" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tasks">
+            <EntityTypeMapping TypeName="EmployeesDBModel.Task">
+              <MappingFragment StoreEntitySet="Tasks">
+                <ScalarProperty Name="TaskName" ColumnName="TaskName" />
+                <ScalarProperty Name="TaskId" ColumnName="TaskId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EmpTasks">
+            <EntityTypeMapping TypeName="EmployeesDBModel.EmpTask">
+              <MappingFragment StoreEntitySet="EmpTasks">
+                <ScalarProperty Name="TaskId" ColumnName="TaskId" />
+                <ScalarProperty Name="EmpId" ColumnName="EmpId" />
+                <ScalarProperty Name="EmpTaskId" ColumnName="EmpTaskId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Data.Entity;
 
 namespace api.Service
 {
@@ -18,6 +19,17 @@ namespace api.Service
         public Employee Get(int id)
         {
             return Context.Set<Employee>().Find(id);
+        }
+
+        public IQueryable GetTasks(int id)
+        {
+            var res = Context.Set<EmpTask>().Include(c => c.Task).Where(c => c.EmpId == id)
+                .Select(x => new
+                {
+                    TaskName = x.Task.TaskName
+                });
+
+            return res;
         }
 
         public Employee Post(Employee Obj)

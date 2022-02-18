@@ -1,23 +1,119 @@
 ﻿<div ng-controller="EmpCtrl">
 
-     
-    <input type="text" ng-model="food" placeholder="Enter food" />
-
-    <p>Sriracha sauce is great with dddd {{food}}!</p>
-
-    <table class="table">
+    <table class="table tab-content table-responsive table-striped">
         <thead>
             <tr>
-                <th>id</th>
-                <th>name</th>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Department</th>
+                <th>Salary</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="data in records">
-                <td>{{data.Id}}</td>
-                <td>{{data.Name}}</td>
-
+            <tr dir-paginate="data in records | itemsPerPage: pageSize" total-items="totalData" current-page="currentPage" ng-click="ClickRow(data)">
+                <td>{{ data.Id }}</td>
+                <td>{{ data.Name }}</td>
+                <td>{{ data.Department }}</td>
+                <td>{{ data.Salary }}</td>
+                <td><button type="button" ng-click="GetTasks(data)" class="btn btn-primary">Tasks</button> </td>
             </tr>
+
         </tbody>
+        <tfoot>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>Total Salary :{{TotalSalary}}</td>
+            </tr>
+        </tfoot>
     </table>
+
+    <div class="modal fade" id="EditModal" role="dialog" data-backdrop="static" data-keyboard="false" aria-labelledby="EditModalLabel">
+        <form name="myForm">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    </div>
+                    <br />
+                    <div class="modal-body">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <label> ID </label>
+                                    <div class="fg-line">
+                                        <input type="text" class="form-control" ng-model="rec.Id" disabled readonly />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <label> Name </label>
+                                    <div class="fg-line">
+                                        <input type="text" class="form-control" ng-model="rec.Name" disabled readonly />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <label> Department </label>
+                                    <div class="fg-line">
+                                        <input type="text" class="form-control" ng-model="rec.Department" disabled readonly />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <label> Salary </label>
+                                    <div class="fg-line" ng-class="{ 'has-error' : myForm.Salary.$invalid}">
+                                        <input type="number" class="form-control" ng-model="rec.Salary" name="Salary" required />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <save-directive load="load"
+                                        disabled="myForm.$invalid"
+                                        ng-click="Save(rec)">
+                        </save-directive>
+
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="modal fade" id="TasksModal" role="dialog" data-backdrop="static" data-keyboard="false" aria-labelledby="TasksModalLabel">
+        <form name="myForm">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    </div>
+                    <br />
+                    <div class="modal-body">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <ul>
+                                        <li ng-repeat="task in tasks">{{task.TaskName}}</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
 </div>
+

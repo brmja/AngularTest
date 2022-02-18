@@ -14,9 +14,16 @@ namespace api.ADO
     
     public partial class Employee
     {
+        public Employee()
+        {
+            this.EmpTasks = new HashSet<EmpTask>();
+        }
+    
         public int Id { get; set; }
         public string Name { get; set; }
         public string Department { get; set; }
         public long Salary { get; set; }
+    
+        public virtual ICollection<EmpTask> EmpTasks { get; set; }
     }
 }
