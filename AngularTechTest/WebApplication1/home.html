@@ -1,5 +1,5 @@
 ﻿<div ng-controller="EmpCtrl">
-
+    <h4>  Double click on row to show Employee data </h4>
     <table class="table tab-content table-responsive table-striped">
         <thead>
             <tr>
@@ -11,7 +11,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr dir-paginate="data in records | itemsPerPage: pageSize" total-items="totalData" current-page="currentPage" ng-click="ClickRow(data)">
+            <tr dir-paginate="data in records | itemsPerPage: pageSize" total-items="totalData" current-page="currentPage" ng-dblclick="ClickRow(data)">
                 <td>{{ data.Id }}</td>
                 <td>{{ data.Name }}</td>
                 <td>{{ data.Department }}</td>
@@ -29,13 +29,14 @@
             </tr>
         </tfoot>
     </table>
-
+      
     <div class="modal fade" id="EditModal" role="dialog" data-backdrop="static" data-keyboard="false" aria-labelledby="EditModalLabel">
         <form name="myForm">
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4>Edit</h4>
                     </div>
                     <br />
                     <div class="modal-body">
@@ -93,6 +94,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4>Tasks</h4> 
                     </div>
                     <br />
                     <div class="modal-body">
