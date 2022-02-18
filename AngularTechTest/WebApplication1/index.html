@@ -1,0 +1,28 @@
+﻿<!DOCTYPE html>
+
+<html ng-app="myApp">
+<head>
+    <title>First App</title>
+
+    <script src="Scripts/angular.min.js"></script>
+    <script src="Scripts/angular-ui-router.min.js"></script>
+    <script src="Scripts/oclazyload/dist/ocLazyLoad.min.js"></script>
+
+    <script src="app/app.module.js"></script>
+    <script src="app/Config.js"></script>
+
+</head>
+<body>
+
+    <!--<ul class="nav navbar-nav navbar-right">
+        <li><a ui-sref="home"><i class="fa fa-home"></i> Home</a></li>
+        <li><a ui-sref="london"><i class="fa fa-shield"></i> London</a></li>
+    </ul>-->
+
+    <div ui-view></div>
+
+    <!--<div>
+        {{food}}
+    </div>-->
+</body>
+</html>

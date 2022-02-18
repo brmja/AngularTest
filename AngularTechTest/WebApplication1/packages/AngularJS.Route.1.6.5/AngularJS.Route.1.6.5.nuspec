@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>AngularJS.Route</id>
+    <version>1.6.5</version>
+    <title>AngularJS Route</title>
+    <authors>The AngularJS Team</authors>
+    <owners>The AngularJS Team</owners>
+    <projectUrl>http://angularjs.org/</projectUrl>
+    <iconUrl>https://api.nuget.org/v3-flatcontainer/angularjs.route/1.6.5/icon</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>See the AngularJS.* packages for other Angular modules</description>
+    <summary>AngularJS. HTML enhanced for web apps!
+
+AngularJS.Route contains the Angular Route module. 
+
+DISCLAIMER: This package is maintained by Scott Hanselman and John Papa, but neither of us work on Angular JS. This is simply a repackaging for use by NuGet Users</summary>
+    <language>en-US</language>
+    <tags>angular angularjs</tags>
+    <dependencies>
+      <dependency id="AngularJS.Core" version="1.6.5" />
+    </dependencies>
+  </metadata>
+</package>
